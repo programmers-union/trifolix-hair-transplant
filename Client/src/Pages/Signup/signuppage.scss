@@ -1,0 +1,151 @@
+.signup-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #e0e0e0;
+  padding: 20px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.signup-box {
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+
+  h2 {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #333;
+  }
+
+  form {
+    .input-group {
+      margin-bottom: 20px;
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: 500;
+        color: #555;
+      }
+
+      input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 14px;
+        background-color: #f9f9f9;
+        transition: border-color 0.3s;
+
+        &:focus {
+          border-color: #777;
+          outline: none;
+        }
+      }
+
+      .password-input {
+        position: relative;
+   
+
+        input {
+          padding-right: 50px;
+              
+          background-color: #f9f9f9;
+        }
+
+        .toggle-password {
+          position: absolute;
+          right: 10px;
+          top: 50%;
+          transform: translateY(-50%);
+          background: none;
+          border: none;
+          cursor: pointer;
+          font-size: 14px;
+          color: #777;
+
+          &:hover {
+            color: #333;
+          }
+        }
+      }
+
+      .error {
+        margin-top: 5px;
+        font-size: 12px;
+        color: #e74c3c;
+      }
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 12px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: #555;
+      }
+    }
+  }
+
+  .account-redirect {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+    color: #555;
+
+    a {
+      color: #333;
+      text-decoration: none;
+      font-weight: 500;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 480px) {
+  .signup-box {
+    padding: 30px;
+
+    h2 {
+      font-size: 20px;
+    }
+
+    form {
+      .input-group {
+        label {
+          font-size: 13px;
+        }
+
+        input {
+          font-size: 13px;
+        }
+      }
+
+      .submit-btn {
+        font-size: 14px;
+      }
+    }
+
+    .account-redirect {
+      font-size: 13px;
+    }
+  }
+}
