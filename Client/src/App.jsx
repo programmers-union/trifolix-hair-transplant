@@ -15,7 +15,7 @@ import { axiosInterceptorPage } from './componets/Interceptor/interceptor';
 import { AddressForm } from './Pages/Addresspage/AddressForm';
 
 function App() {
-  const [totalCartData, setTotalCartData] = useState([]);
+  
 
 
 
