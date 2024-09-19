@@ -12,7 +12,7 @@ dotenv.config();
 connectDatabase();
 app.use(express.json());
 app.use(cors({
-    origin: 'https://trifolix-hair-transplant-x2a8-frontend.vercel.app/',
+    origin: 'https://trifolix-hair-transplant-x2a8-frontend.vercel.app',
     methods: ['GET', 'POST', 'PUT', 'DELETE','PATCH'], 
     credentials: true 
 }));
@@ -29,9 +29,8 @@ app.use('/api/auth',authRoutes);
 app.use('/api/admin',adminRoutes);
 app.use('/api/user',userRoutes);
 app.use('/',(req,res)=>{
-    res.send({msg:'hallow worekd'})
+    res.send('hallo world hi')
 })
-
 
 app.use(errorHandler);
 
