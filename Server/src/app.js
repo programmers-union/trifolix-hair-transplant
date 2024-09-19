@@ -29,7 +29,7 @@ app.use('/api/auth',authRoutes);
 app.use('/api/admin',adminRoutes);
 app.use('/api/user',userRoutes);
 app.use('/',(req,res)=>{
-    res.json({msg:'hallo world'})
+    res.send('hallo world hi')
 })
 
 app.use(errorHandler);
