@@ -1,17 +1,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Forum&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Forum&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700&display=swap');
+    
+@font-face {
+  font-family:helvetic ;
+
+  src: url("../../../src/Font/Helvetica-Bold.ttf");
+}
+.helvetic {
+  font-family: helvetic, sans-serif;
+}
+
+
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: helvetic, sans-serif;
+
 }
 
 .homepage {
   width: 100%;
   min-height: 300vh;
-  font-family: "Roboto", sans-serif;
+  font-family: helvetic, sans-serif;
+
 
   .content-section {
     height: 100vh;

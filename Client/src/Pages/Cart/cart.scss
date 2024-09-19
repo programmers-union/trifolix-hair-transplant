@@ -25,6 +25,9 @@ $remove-button-hover-color: #ff7066;
   max-width: 900px;
   padding: 2rem;
   box-sizing: border-box;
+  .cart-empty-message{
+    text-align: center;
+  }
 }
 
 .cart-title {

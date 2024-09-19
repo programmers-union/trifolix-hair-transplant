@@ -3,6 +3,7 @@ import CustomError from "../utils/customError.js";
 
 export const authenticate = (req, res, next) => {
     const authHeader = req.headers.authorization;
+    console.log("authHeader:",authHeader);
     
 
     

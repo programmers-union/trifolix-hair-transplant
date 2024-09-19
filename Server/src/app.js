@@ -1,4 +1,5 @@
 import express from 'express';
+import session from 'express-session';
 import cors from 'cors';
 import { errorHandler } from './middlewares/errorHandler.js';
 import { connectDatabase } from './config/db.js';
@@ -9,14 +10,21 @@ import userRoutes from './routes/userRoute.js'
 const app=express();
 dotenv.config();
 connectDatabase();
-
+app.use(express.json());
 app.use(cors({
     origin: 'http://localhost:5173',
     methods: ['GET', 'POST', 'PUT', 'DELETE','PATCH'], 
     credentials: true 
 }));
 
-app.use(express.json());
+app.use(session({
+    secret: 'trifolix',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { maxAge: 600000 } 
+  }));
+
+
 app.use('/api/auth',authRoutes);
 app.use('/api/admin',adminRoutes);
 app.use('/api/user',userRoutes);

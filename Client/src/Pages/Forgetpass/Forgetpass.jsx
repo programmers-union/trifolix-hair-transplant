@@ -3,13 +3,14 @@ import './forget.scss'
 import axios from 'axios';
 import { Modal } from '../../componets/Modal/Modal';
 import { ContextApi } from '../../componets/Contextapi/Context';
+import { useNavigate } from 'react-router-dom';
 export const Forgetpass = () => {
 
   
     const [errors, setErrors] = useState('');
 
     const { setShowOtpModal, showOtpModal, forgetemail, setforgetsetEmail,timer, setTimer, formData, setFormData } = useContext(ContextApi);
-    
+    const naviagte = useNavigate()
     const handleChange = (e) => {
       setforgetsetEmail(e.target.value)
       console.log(forgetemail,"forget");
@@ -40,8 +41,9 @@ export const Forgetpass = () => {
         console.log("before validate");
         const response = await axios.post('http://localhost:5000/api/auth/forgot-password',{forgetemail})
         console.log(response.data,"This data is updated");
+        setforgetsetEmail(forgetemail)
         setShowOtpModal(true)
-        
+       
       } catch (error) {
 
         console.log(error,"backend error");

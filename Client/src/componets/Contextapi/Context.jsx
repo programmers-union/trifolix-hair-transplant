@@ -15,10 +15,12 @@ export const Apiprovider = ({ children }) => {
   const [otp, setOtp] = useState('');
   const [otpAllow, setOtpAllow] = useState(false);
   const [timer, setTimer] = useState(60);
-  const [isSignup,setSignup] = useState(true)
+  const [isSignup, setSignup] = useState(true)
+  const [email, setemail] = useState('')
   const [products, setProducts] = useState([]);
   const [addedToCart, setAddedToCart] = useState();
   const [showOtpModal, setShowOtpModal] = useState(false);
+  const [cartlength, setCartlength] = useState(0)
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -27,62 +29,71 @@ export const Apiprovider = ({ children }) => {
     confirmPassword: '',
   });
 
-  const [forgetemail,setforgetsetEmail] = useState('')
+  const [forgetemail, setforgetsetEmail] = useState('')
 
- const [userauth,setUserAuth] = useState(false)
+  const [userauth, setUserAuth] = useState(false)
 
- const [allCartData,setAllCartData] = useState([])
- const [totalprice,setTotalPrice] = useState()
-
-  
+  const [allCartData, setAllCartData] = useState([])
+  const [totalprice, setTotalPrice] = useState()
 
 
- const fetchCart = async () => {
 
-  try {
-    console.log("inside cart 1");
-    
-    const response = await axiosInstance.get('http://localhost:5000/api/user/cart');
-    setAllCartData(response.data.cartData.items)
-    console.log(response.data.cartData.cartTotal,"total");
-    setTotalPrice(response.data.cartData.cartTotal)
-  
-    console.log("inside cart 2");
-   console.log("response.data:",response.data.cartData);
-   
-    
-  } catch (error) {
-    console.log('ividew vannu');
-    console.error(error);
- 
-    
-  }
-};
+
+  const fetchCart = async () => {
+
+    try {
+      console.log("inside cart 1");
+      const access = localStorage.getItem('accessToken')
+      if (access) {
+        const response = await axiosInstance.get('http://localhost:5000/api/user/cart');
+        setAllCartData(response.data.cartData.items)
+        console.log(response.data.cartData.cartTotal, "total");
+        setTotalPrice(response.data.cartData.cartTotal)
+
+        const totalItemsLength = response.data.cartData.items
+
+        console.log(totalItemsLength.length, "data length");
+
+        setCartlength(totalItemsLength.length)
+
+        console.log("inside cart 2");
+        console.log("response.data:", response.data.cartData);
+      }
+
+
+
+    } catch (error) {
+      console.log('ividew vannu');
+      console.error(error);
+
+
+    }
+  };
   useEffect(() => {
     const access = localStorage.getItem('accessToken')
 
-    if(access){
+    if (access) {
       fetchCart()
       setUserAuth(true)
     }
-  },[])
-  
- 
+  }, [])
 
 
-  
 
- const fetchProducts = async () => {
-  try {
-    const response = await axios.get('http://localhost:5000/api/user/product-data');
-    setProducts(response.data.products);
-    fetchCart()
-  } catch (error) {
-    console.error('Error fetching the products:', error);
-  }
-};
 
-   
+
+
+  const fetchProducts = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/api/user/product-data');
+      setProducts(response.data.products);
+      fetchCart()
+    } catch (error) {
+      console.error('Error fetching the products:', error);
+    }
+  };
+
+
 
   const handleCloseModal = () => {
     setShowOtpModal(false);
@@ -97,16 +108,24 @@ export const Apiprovider = ({ children }) => {
     setOtpAllow(false);
 
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/resend-otp', { email: formData.email });
+      const response = await axios.post('http://localhost:5000/api/auth/resend-otp', { email: formData.email || forgetemail });
       console.log('OTP Resent:', response.data);
-      handleCloseModal();
 
-      
+
     } catch (error) {
       console.error('There was an error resending the OTP:', error);
     }
   };
-    
+
+
+
+
+
+
+
+
+
+
   const handleAddToCart = async (productId, quantity = 1) => {
     try {
       const response = await axiosInstance.post(
@@ -117,36 +136,41 @@ export const Apiprovider = ({ children }) => {
 
       fetchCart()
       setAddedToCart(response.data)
- 
-      console.log('Product added to cart:', response.data , "this is id for the current cliked product");
+
+      console.log('Product added to cart:', response.data, "this is id for the current cliked product");
 
 
     } catch (error) {
       console.error('Error adding product to cart:', error);
-      
+
     }
   };
 
-   
-   
+
+
 
   const handleOtpSubmit = async () => {
     if (otp) {
-       
+
       handleCloseModal();
+    
 
       try {
-       
-        const response = await axios.post('http://localhost:5000/api/auth/verify-otp',  { otp, isSignup},{withCredentials : true});
-  console.log(isSignup,"after issignup");
-        if(isSignup){
+
+
+        console.log(isSignup, email, "after issignup and email");
+        console.log(isSignup, forgetemail, "after issignup and email");
+
+        const response = await axios.post('http://localhost:5000/api/auth/verify-otp', { otp, isSignup,email: formData.email || forgetemail}, { withCredentials: true });
+        console.log(isSignup, email, "after issignup and email");
+        if (isSignup) {
           const accessToken = response.data.accessToken;
           localStorage.setItem("accessToken", accessToken);
           navigate('/')
-        }else{
+        } else {
           navigate('/changepassword')
         }
-        
+
         setUserAuth(true)
       } catch (error) {
         console.error('There was an error submitting the form:', error);
@@ -181,7 +205,8 @@ export const Apiprovider = ({ children }) => {
       addedToCart,
       allCartData,
       fetchCart,
-      totalprice
+      totalprice,
+      cartlength
     }}>
       {children}
     </ContextApi.Provider>

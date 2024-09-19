@@ -18,7 +18,8 @@ import { Link, useNavigate } from 'react-router-dom';
   handlelogout,
   setUserAuth,
   userauth,
-  handlenavigate
+  handlenavigate,
+  cartlength
 
 }
  
@@ -28,7 +29,8 @@ import { Link, useNavigate } from 'react-router-dom';
   return (
     <header
       ref={headerRef}
-      className={`header ${isHidden ? 'header--hidden' : ''} ${isSticky ? 'header--sticky' : ''}`}
+  
+      className={` header ${isHidden ? 'header--hidden' : ''}  ${isSticky ? 'header--sticky' : ''}`}
     >
       <div className='header-left'>
         <div className='logo'>Hair Cycles</div>
@@ -50,11 +52,11 @@ import { Link, useNavigate } from 'react-router-dom';
         onClick={handlelogout }>Logout</a> }
 
           <a href='#read'>Cabinet</a>
-  <Link to="/cart"><a>Cart</a></Link>
+  <Link to="/cart"><a>Cart {cartlength ? <small style={{color :"green"}} >{cartlength}</small> :''} </a></Link>
         </div>
         <FaBars className='menu-icon' onClick={toggleMenu} />
       </div>
-
+      {/* className={`header ${isHidden ? 'header--hidden' : ''} ${isSticky ? 'header--sticky' : ''}`} */}
       <div className={`mobile-menu-content ${isMenuOpen ? 'open' : 'close'}`}>
         <IoMdClose className='close-icon' onClick={toggleMenu} />
         <div className='mobile-nav-links'>
@@ -67,6 +69,13 @@ import { Link, useNavigate } from 'react-router-dom';
 >
             Home
             </Link>
+
+            <Link to='/cart'
+            className={selectedNavItem === 'cart' ? 'selected' : ''}
+            onClick={() => handleNavClick('cart')}
+          >
+           Cart {cartlength ? <small style={{color :"green"}} >{cartlength}</small> :''}
+          </Link>
         
           <a
             href='#shop'
@@ -114,12 +123,7 @@ import { Link, useNavigate } from 'react-router-dom';
           >
            cabinet
           </a>
-        <Link to='/cart'
-            className={selectedNavItem === 'cart' ? 'selected' : ''}
-            onClick={() => handleNavClick('cart')}
-          >
-            Cart
-          </Link>
+      
          
         </div>
       </div>
