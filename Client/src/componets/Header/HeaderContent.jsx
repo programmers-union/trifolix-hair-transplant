@@ -1,6 +1,7 @@
 // HeaderContent.js
 import React from 'react';
 import { FaSearch, FaBars } from 'react-icons/fa';
+import {IoIosSearch} from 'react-icons/io';
 import { IoMdClose } from 'react-icons/io';
 import { Link, useNavigate } from 'react-router-dom';
  const HeaderContent = ({
@@ -39,9 +40,7 @@ import { Link, useNavigate } from 'react-router-dom';
           <a href='#read'>Read</a>
           <a href='#stores'>Stores</a>
         </div>
-        <button className='search-button'>
-          <FaSearch />
-        </button>
+     
       </div>
 
       <div className='header-right'>
