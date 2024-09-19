@@ -85,7 +85,7 @@ export const Apiprovider = ({ children }) => {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/user/product-data');
+      const response = await axios.get('api/user/product-data');
       setProducts(response.data.products);
       fetchCart()
     } catch (error) {
