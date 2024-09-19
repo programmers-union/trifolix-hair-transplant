@@ -27,12 +27,13 @@
 
     .header {
       color: black;
-      padding: 25px;
+      padding: 23px;
       transition: transform 0.3s ease-in-out;
       width: 100%;
       display: flex;
       justify-content: space-between;
       align-items: center;
+    
       border-bottom: 1px solid #e5e5e5;
      background: transparent;
      background: white;
@@ -60,17 +61,22 @@
       .header-left {
         flex: 1;
         justify-content: flex-start;
+   
 
         .nav-links {
           display: flex;
           gap: 20px;
           cursor: pointer;
-
+          font-size: 12px;
+          font-weight: 300;
+          :first-child{
+            margin-left: 20px;
+          }
           a {
+            margin-right: 15px;
             text-decoration: none;
             color: black;
-            font-size: 15px;
-            font-weight: 500;
+          
             
           }
         }
@@ -84,8 +90,9 @@
 
         .logo {
           display: none;
-          font-weight: bold;
-          font-size: 18px;
+       
+          font-size: 12px;
+          font-weight: 300;
           cursor: pointer;
         }
       }
@@ -93,13 +100,16 @@
       .header-right {
         flex: 1;
         justify-content: flex-end;
-   
-
+        font-size: 12px;
+        font-weight: 300;
+      :last-child{
+        margin-left: 5px;
+      }
         a {
           text-decoration: none;
           color: black;
-          font-size: 15px;
-          font-weight: 500;
+          margin-right: 10px;
+       
           
         }
 
