@@ -155,7 +155,7 @@ export const AddressForm = () => {
 
           <div className="form-row">
             <div className="form-group">
-              <Label htmlFor="city">City <RequiredAsterisk /></Label>
+              <Label htmlFor="city">City<RequiredAsterisk /></Label>
               <Input
                 id="city"
                 name="city"
@@ -166,7 +166,7 @@ export const AddressForm = () => {
               {errors.city && <span className="error-text">{errors.city}</span>}
             </div>
             <div className="form-group">
-              <Label htmlFor="postcode">Postcode <RequiredAsterisk /></Label>
+              <Label htmlFor="postcode">Postcode<RequiredAsterisk /></Label>
               <Input
                 id="postcode"
                 name="postcode"
@@ -180,7 +180,7 @@ export const AddressForm = () => {
 
           <div className="form-row">
             <div className="form-group">
-              <Label htmlFor="mobilePhone">Mobile Phone <RequiredAsterisk /></Label>
+              <Label htmlFor="mobilePhone">Mobile Phone<RequiredAsterisk /></Label>
               <Input
                 id="mobilePhone"
                 name="mobilePhone"
@@ -191,7 +191,7 @@ export const AddressForm = () => {
               {errors.mobilePhone && <span className="error-text">{errors.mobilePhone}</span>}
             </div>
             <div className="form-group">
-              <Label htmlFor="landmark">Landmark <small>(Optional)</small></Label>
+              <Label htmlFor="landmark">Landmark<small>(Optional)</small></Label>
               <Input
                 id="landmark"
                 name="landmark"
