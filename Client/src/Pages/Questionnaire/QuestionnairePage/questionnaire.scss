@@ -82,13 +82,14 @@
       border-radius: 50%;
       border: 1px solid black;
       transition: transform 0.2s ease-in-out ;
+      cursor: pointer;
      
       &:active {
         transform: scale(0.90);
       }
       .back-button{
        font-size: 10px;
-      
+      cursor: pointer;
         align-items: center;
       }
     }

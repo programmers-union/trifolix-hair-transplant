@@ -139,7 +139,7 @@ export const Header = ({ visible }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [selectedNavItem, setSelectedNavItem] = useState('home');
   const headerRef = useRef(null);
-  const { setUserAuth, userauth } = useContext(ContextApi);
+  const { setUserAuth, userauth ,cartlength} = useContext(ContextApi);
   const location = useLocation();
   const navigate = useNavigate();
   const [headerHeight, setHeaderHeight] = useState(0);
@@ -149,38 +149,38 @@ export const Header = ({ visible }) => {
     setHeaderHeight(headerRef.current?.offsetHeight || 0);
   }, []);
 
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     const currentScrollY = window.scrollY;
-
-  //     if (currentScrollY > 0) {
-  //       setIsSticky(true);
-
-  //       if (currentScrollY > lastScrollY) {
-  //         setIsHidden(true); // Hide the header on scroll down
-  //       } else {
-  //         setIsHidden(false); // Show the header on scroll up
-  //       }
-  //     } else {
-  //       setIsSticky(false);
-  //       setIsHidden(false);
-  //     }
-
-  //     setLastScrollY(currentScrollY);
-  //   };
-
-  //   window.addEventListener('scroll', handleScroll, { passive: true });
-
-  //   return () => window.removeEventListener('scroll', handleScroll);
-  // }, [lastScrollY, headerHeight]);
-
-
   useEffect(() => {
-    const currentScrollY = window.scrollY;
-    if (currentScrollY < 0 && currentScrollY > 0) {
-      setIsSticky(true);
-    }
-  }, [])
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY > 0) {
+        setIsSticky(true);
+
+        if (currentScrollY > lastScrollY) {
+          setIsHidden(true); // Hide the header on scroll down
+        } else {
+          setIsHidden(false); // Show the header on scroll up
+        }
+      } else {
+        setIsSticky(false);
+        setIsHidden(false);
+      }
+
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY, headerHeight]);
+
+
+  // useEffect(() => {
+  //   const currentScrollY = window.scrollY;
+  //   if (currentScrollY < 0 && currentScrollY > 0) {
+  //     setIsSticky(true);
+  //   }
+  // }, [])
   
     
 
@@ -244,6 +244,7 @@ export const Header = ({ visible }) => {
                handleNavClick={handleNavClick}
                handlelogout={handlelogout}               setUserAuth={setUserAuth}
                userauth={userauth}
+               cartlength={cartlength}
              />
          </div>
     </div>      

@@ -33,7 +33,7 @@ export const SignUpPage = () => {
     setErrors(tempErrors);
     return Object.keys(tempErrors).length === 0;
   };
-  console.log(formData,"formdata");
+
   
 
   const handleChange = (e) => {
@@ -55,12 +55,17 @@ export const SignUpPage = () => {
     if (validate()) {
 
       try {
+         console.log("called");
+         
         const response = await axios.post('http://localhost:5000/api/auth/signup',formData);
-        setShowOtpModal(true);
         console.log('Form Submitted:', response.data);
+        setShowOtpModal(true);
+       
+
       } catch (error) {
         console.error('There was an error submitting the form:', error);
       }
+
     }
   };
 

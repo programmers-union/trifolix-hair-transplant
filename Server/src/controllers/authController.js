@@ -11,47 +11,64 @@ import {
 import { body } from "express-validator";
 
 
+
 export const signup = async (req, res, next) => {
   try {
     const { firstName, lastName, email, password } = req.body;
 
-    
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      return next(new CustomError('User already exists', 400));
+      if (!existingUser.isVerified) {
+        console.log("not verified but saved to db");
+        const { otp, otpExpiry } = generateOtp();
+        sendOtpToUser(email, otp);
+        console.log("otp:",otp);
+        const hashedOtp = await bcrypt.hash(otp, 10);
+        const hashedPassword = await bcrypt.hash(password, 10);
+     existingUser.firstName=firstName,
+     existingUser.lastName=lastName,
+     existingUser.email=email,
+     existingUser.password=hashedPassword,
+     existingUser.otp=hashedOtp,
+     existingUser.otpExpiry=otpExpiry
+
+    await existingUser.save();
+    return res.status(200).json({msg:"user need to verify"});
+      } else {
+        console.log("saved to db and also verified");
+        return next(new CustomError("User already exists", 400));
+      }
     }
 
-    
     const hashedPassword = await bcrypt.hash(password, 10);
+    
 
-    
     const { otp, otpExpiry } = generateOtp();
-    
-    
+    const hashedOtp = await bcrypt.hash(otp, 10);
+
+    console.log("otp:", otp);
+
     const user = new User({
       firstName,
       lastName,
       email,
       password: hashedPassword,
-      otp,
-      otpExpiry
+      otp: hashedOtp,
+      otpExpiry,
     });
 
-    
     await user.save();
 
-    
     try {
-       sendOtpToUser(email, otp);
+      sendOtpToUser(email, otp);
     } catch (error) {
-      console.error('Failed to send OTP email:', error);
-      
+      console.error("Failed to send OTP email:", error);
     }
 
-    
     res.status(201).json({
       success: true,
-      message: "User registered successfully. Please verify the OTP sent to your email.",
+      message:
+        "User registered successfully. Please verify the OTP sent to your email.",
     });
   } catch (error) {
     next(error);
@@ -61,21 +78,36 @@ export const signup = async (req, res, next) => {
 export const verifyOtp = async (req, res, next) => {
   try {
     
-    
-    const { otp, isSignup } = req.body;
+    console.log("req.body:",req.body);
+    const { otp,email, isSignup } = req.body;
+    console.log("email",email);
     
     if (!otp) {
+
       return next(new CustomError("OTP is required", 400));
+
     }
     
-    const user = await User.findOne({ otp });
+
+    
+    const user = await User.findOne({email:email});
+    console.log("user:",user);
     
     if (!user) {
-      return next(new CustomError("Invalid OTP", 400));
+      
+      return next(new CustomError("user not found", 404));
     }
     
     if (user.otpExpiry < Date.now()) {
       return next(new CustomError("OTP has expired", 400));
+    }
+    console.log("reached hereee");
+    const isOtpValid=await bcrypt.compare(otp,user.otp);
+    console.log("isOtpValid:chehcking");
+    console.log("isOtpValid:",isOtpValid);
+
+    if(!isOtpValid){
+      return next(new CustomError("Invalid OTP",400));
     }
 
     user.isVerified = true;
@@ -174,6 +206,7 @@ export const refreshToken = async (req, res, next) => {
 export const login = async (req, res, next) => {
   
   try {
+    console.log("reached for login");
     const { email, password } = req.body;
 
     
@@ -183,7 +216,7 @@ export const login = async (req, res, next) => {
 
     
     const user = await User.findOne({ email }).select("+password");
-
+    console.log("user:",user);
     
     if (!user || !(await bcrypt.compare(password, user.password))) {
       return next(new CustomError("Invalid credentials", 401));
@@ -223,6 +256,7 @@ export const login = async (req, res, next) => {
 export const resendOtp = async (req, res, next) => {
   try {
     const { email } = req.body;
+    console.log("email:",email);
 
     if (!email) {
       return next(new CustomError('Email is required', 400));
@@ -288,7 +322,9 @@ export const forgotPassword =async(req,res,next)=>{
       return next(new CustomError('User not found', 404));
     }
     const{otp,otpExpiry}=generateOtp();
-    user.otp=otp;
+    const hashedOtp = await bcrypt.hash(otp, 10);
+
+    user.otp=hashedOtp;
     user.otpExpiry=otpExpiry;
     await user.save();
 
