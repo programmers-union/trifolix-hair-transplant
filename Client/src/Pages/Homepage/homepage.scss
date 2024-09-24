@@ -27,9 +27,10 @@
   font-family: helvetic, sans-serif;
 
 
+
   .content-section {
     height: 100vh;
-    font-family: "Forum", serif;
+
     width: 100%;
     position: relative;
     overflow: hidden;
@@ -75,7 +76,7 @@
           p {
             line-height: 1.5;
             font-size: 1rem; // Adjust font size if needed
-            font-family: "Lato", sans-serif;
+        
             line-height: 26px;
             color: #333;
           }
@@ -115,7 +116,7 @@
             border: none;
             font-size: 15px;
           
-            font-family: "Lato", sans-serif;
+
 
         
           
@@ -184,7 +185,7 @@
     }
 
     .content-wrapper {
-      font-family: "Forum", serif;
+
       width: 50%;
       button{
         background-color: white;
@@ -216,7 +217,7 @@
         font-size: 1.5rem;
         margin-bottom: 10px;
         color: #333; // Dark color for better readability
-        font-family: "Forum", serif;
+      
       }
 
       p {
@@ -224,7 +225,7 @@
         color: #555; // Slightly lighter color for the paragraph
         font-size: 1rem;
         line-height: 1.5;
-        font-family: "Lato", sans-serif;
+  
       }
      
        

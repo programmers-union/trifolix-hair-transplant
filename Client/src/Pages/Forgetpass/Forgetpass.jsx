@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Modal } from '../../componets/Modal/Modal';
 import { ContextApi } from '../../componets/Contextapi/Context';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 export const Forgetpass = () => {
 
   
@@ -43,9 +44,9 @@ export const Forgetpass = () => {
         console.log(response.data,"This data is updated");
         setforgetsetEmail(forgetemail)
         setShowOtpModal(true)
-       
+      
       } catch (error) {
-
+        toast.error('This Email is not Registered')
         console.log(error,"backend error");
 
       }

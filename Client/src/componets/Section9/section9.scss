@@ -7,7 +7,7 @@
   margin: auto;
 
   h1{
-    font-family: "Forum", serif;
+
     text-align: center;
     margin-bottom: 20px;
 
@@ -26,7 +26,7 @@
     .product-item {
       
       width: calc(33.33% - 20px); /* Default for large screens */
-      font-family: "Lato", sans-serif;
+    
       position: relative;
       border: 1px solid #ddd;
       border-radius: 8px;
@@ -59,7 +59,7 @@
         margin-top: 10px;
         font-size: 1rem;
         font-weight: 600;
-        font-family: "Forum", serif;
+       
      
       }
 
@@ -83,7 +83,7 @@
             margin: 5px 0;
             font-size: 0.8rem;
             margin-right: 10px;
-            font-family: "Forum", serif;
+        
 
             input {
               margin-right: 10px;

@@ -127,10 +127,11 @@
 // };
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import './header.scss';
-import HeaderContent from './HeaderContent';
+
 import { useLocation, useNavigate } from 'react-router-dom';
 import { axiosInterceptorPage } from '../Interceptor/interceptor';
 import { ContextApi } from '../Contextapi/Context';
+import { HeaderContent } from './HeaderContent';
 
 export const Header = ({ visible }) => {
   const [isHidden, setIsHidden] = useState(false);
@@ -143,6 +144,7 @@ export const Header = ({ visible }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const [headerHeight, setHeaderHeight] = useState(0);
+  const [ isActive ,setIsActive] = useState(false)
 
   useEffect(() => {
     // Update header height when the component mounts or updates
@@ -200,7 +202,8 @@ export const Header = ({ visible }) => {
   }, [location.pathname]);
 
   const toggleMenu = () => {
-    setIsMenuOpen(prevState => !prevState);
+    setIsActive(!isActive)
+    setIsMenuOpen(!isMenuOpen)
   };
 
   const handleNavClick = async (item) => {
@@ -232,23 +235,25 @@ export const Header = ({ visible }) => {
 
   return (
     <>
-      {visible && 
+       {visible && (
         <div className='header-container' ref={headerRef}>
-        
-          <div className='header-wrapper'>           <HeaderContent
-             isHidden={isHidden}
-            isSticky={isSticky}
-               toggleMenu={toggleMenu}
-               isMenuOpen={isMenuOpen}
-               selectedNavItem={selectedNavItem}
-               handleNavClick={handleNavClick}
-               handlelogout={handlelogout}               setUserAuth={setUserAuth}
-               userauth={userauth}
-               cartlength={cartlength}
-             />
-         </div>
-    </div>      
-     }
+          <div className='header-wrapper'>
+            <HeaderContent
+              isHidden={isHidden}
+              isSticky={isSticky}
+              toggleMenu={toggleMenu}
+              isMenuOpen={isMenuOpen}
+              selectedNavItem={selectedNavItem}
+              handleNavClick={handleNavClick}
+              handlelogout={handlelogout}
+              setUserAuth={setUserAuth}
+              userauth={userauth}
+              cartlength={cartlength}
+              isActive={isActive}
+            />
+          </div>
+        </div>
+      )}
     </>
   );
 };

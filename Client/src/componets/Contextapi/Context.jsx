@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { axiosInterceptorPage } from "../Interceptor/interceptor"; // Assuming this is your interceptor file
 import axios from "axios";
 import { useEffect } from "react";
+import toast from "react-hot-toast";
 
 
 export const ContextApi = createContext();
@@ -85,7 +86,7 @@ export const Apiprovider = ({ children }) => {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get('https://trifolix-hair-transplant-backend.vercel.app/api/user/product-data');
+      const response = await axios.get('http://localhost:5000/api/user/product-data');
       setProducts(response.data.products);
       console.log(response.data.products)
       fetchCart()
@@ -168,6 +169,9 @@ export const Apiprovider = ({ children }) => {
           const accessToken = response.data.accessToken;
           localStorage.setItem("accessToken", accessToken);
           navigate('/')
+          toast.success('SignUp Successfully..!', {
+            position: 'top-center',
+          });
         } else {
           navigate('/changepassword')
         }

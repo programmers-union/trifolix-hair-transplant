@@ -33,18 +33,18 @@ export const ProductPage = () => {
     <div className="product-page">
       <div className="left-section">
         <div className="product-image">
-          <img src={productDetails.image} alt={productDetails.name} />
+          <img src={productDetails?.image} alt={productDetails?.name} />
         </div>
         <div className="product-info">
-          <h1>{productDetails.name}</h1>
-          <p>{productDetails.description}</p>
-          <p className="product-price">${productDetails.price}</p>
-          <button onClick={()=>handleAddToCart(productDetails._id)} className="add-to-cart-btn">Add To Your Cart</button>
+          <h1>{productDetails?.name}</h1>
+          <p>{productDetails?.description}</p>
+          <p className="product-price">${productDetails?.price}</p>
+          <button onClick={()=>handleAddToCart(productDetails?._id)} className="add-to-cart-btn">Add To Your Cart</button>
         </div>
       </div>
       <div className="right-section">
         <p>
-          {productDetails.details}
+          {productDetails?.details}
         </p>
       </div>
     </div>

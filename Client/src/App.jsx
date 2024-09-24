@@ -13,7 +13,8 @@ import { Changepass } from './Pages/Changepasspage/Changepass';
 import { ProductPage } from './Pages/Productdetails/Productdetails';
 import { axiosInterceptorPage } from './componets/Interceptor/interceptor';
 import { AddressForm } from './Pages/Addresspage/AddressForm';
-
+import './app.scss'
+import { Toaster } from 'react-hot-toast';
 function App() {
   
 
@@ -27,9 +28,13 @@ function App() {
   };
 
   return (
-    <>
+    <div className='root'>
+ 
       <Header1 />
+      <Toaster />
       <Routes>
+     
+      
         <Route path="/" element={<Homepage />} />
         <Route path="/goals" element={<PageTransition><QuestionnairePage /></PageTransition>} />
         <Route path="/cart" element={<PageTransition><CartPage  /></PageTransition>} />
@@ -41,7 +46,7 @@ function App() {
         <Route path="/product/:id" element={<PageTransition><ProductPage /></PageTransition>} />
         <Route path="/addressform" element={<PageTransition><AddressForm/></PageTransition>} />
       </Routes>
-    </>
+      </div>
   );
 }
 
