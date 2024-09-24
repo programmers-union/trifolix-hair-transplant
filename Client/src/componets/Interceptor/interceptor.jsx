@@ -1,8 +1,8 @@
 import axios from "axios";
-
+const REACT_APP_API_DEFAULT = "https://trifolix-hair-transplant-3.onrender.com"
 export const axiosInterceptorPage = () => {
   const axiosInstance = axios.create({
-    baseURL: "http://localhost:5000",
+    baseURL: REACT_APP_API_DEFAULT,
     headers: { "Content-Type": "application/json" },
     withCredentials: true,
   });
@@ -36,8 +36,8 @@ export const axiosInterceptorPage = () => {
 
           try {
             // Use a separate axios instance for token refresh
-            const refreshResponse = await axios.post(
-              "http://localhost:5000/api/auth/refresh-token",
+            const refreshResponse = await axios.post(`
+              ${REACT_APP_API_DEFAULT}/api/auth/refresh-token`,
               {},
               { withCredentials: true }
             );

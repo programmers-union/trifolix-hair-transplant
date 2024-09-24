@@ -47,7 +47,7 @@ export const CartPage = () => {
   const axiosInstance = axiosInterceptorPage();
  const naviagte = useNavigate()
 
-  
+    const REACT_APP_API_DEFAULT = "https://trifolix-hair-transplant-3.onrender.com"
 
   useEffect(() => {
   
@@ -66,7 +66,7 @@ export const CartPage = () => {
 
   const increaseCartItemQuantity = async (productId, newQuantity) => {
     try {
-      await axiosInstance.patch(`http://localhost:5000/api/user/increase-quantity`, 
+      await axiosInstance.patch(`${REACT_APP_API_DEFAULT}/api/user/increase-quantity`, 
         { productId, newQuantity },{withCredentials : true}
       );
       fetchCart();
@@ -77,7 +77,7 @@ export const CartPage = () => {
 
   const decreaseCartItemQuantity = async (productId, newQuantity) => {
     try {
-      await axiosInstance.patch(`http://localhost:5000/api/user/decrease-quantity`, 
+      await axiosInstance.patch(`${REACT_APP_API_DEFAULT}/api/user/decrease-quantity`, 
         { productId, newQuantity },{withCredentials : true}
       );
       fetchCart();
@@ -88,7 +88,7 @@ export const CartPage = () => {
 
   const handleRemove = async (productId) => {
     try {
-      const response = await axiosInstance.delete(`http://localhost:5000/api/user/remove-item`, {
+      const response = await axiosInstance.delete(`${REACT_APP_API_DEFAULT}/api/user/remove-item`, {
         data: { productId },
       });
       console.log(response.data,"response data");
