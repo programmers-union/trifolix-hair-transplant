@@ -94,6 +94,7 @@ export const Apiprovider = ({ children }) => {
       setProducts(response.data.products);
       console.log(response.data.products)
       console.log("hello");
+      console.log("heyy");
       
 
 
