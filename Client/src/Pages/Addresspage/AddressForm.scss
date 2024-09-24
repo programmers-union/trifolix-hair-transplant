@@ -1,15 +1,15 @@
 .main-billing {
   width: 100%;
-  margin-top: 50px;
+padding-top: 60px;
   display: flex;
   justify-content: center;
-  font-family: "popins", sans-serif;
+
   
   .billing-address-form {
     width: 700px;
     margin: 0 auto;
     padding: 1.5rem;
-
+ 
   
     border-radius: 8px;
     
@@ -156,7 +156,7 @@
 .modal-actions {
   display: flex;
   justify-content: space-between;
-  font-family: "Lato", sans-serif;
+
 
   .resend-button {
     order: 1;

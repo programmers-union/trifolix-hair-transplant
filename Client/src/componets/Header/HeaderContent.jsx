@@ -1,14 +1,9 @@
-// HeaderContent.js
 import React from 'react';
-import { FaSearch, FaBars } from 'react-icons/fa';
-import {IoIosSearch} from 'react-icons/io';
+import { FaBars } from 'react-icons/fa';
 import { IoMdClose } from 'react-icons/io';
-import { Link, useNavigate } from 'react-router-dom';
- const HeaderContent = ({
- 
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
-  
-
+export const HeaderContent = ({
   isHidden,
   isSticky,
   headerRef,
@@ -17,118 +12,63 @@ import { Link, useNavigate } from 'react-router-dom';
   selectedNavItem,
   handleNavClick,
   handlelogout,
-  setUserAuth,
   userauth,
-  handlenavigate,
-  cartlength
+  cartlength,
+  isActive
+}) => {
+  const navigate = useNavigate();
+  const location = useLocation();
 
-}
- 
+  // Determine the selectedNavItem based on the current path
+  const path = location.pathname;
+  const currentNavItem = path === '/' ? 'home' : path.substring(1); // Adjust for the root path
 
-   ) => {
-    const naviagte = useNavigate()
   return (
     <header
       ref={headerRef}
-  
-      className={` header ${isHidden ? 'header--hidden' : ''}  ${isSticky ? 'header--sticky' : ''}`}
+      className={`header ${isHidden ? 'header--hidden' : ''} ${isSticky ? 'header--sticky' : ''}`}
     >
       <div className='header-left'>
         <div className='logo'>Hair Cycles</div>
         <div className='nav-links'>
-          <a href='#shop'>Shop</a>
-          <a href='#read'>Read</a>
-          <a href='#stores'>Stores</a>
+          <Link to='/' className={currentNavItem === 'home' ? 'selected' : ''} >Home</Link>
+          <Link to='#shop' className={currentNavItem === 'shop' ? 'selected' : ''} onClick={() => handleNavClick('shop')}>Shop</Link>
+          <Link to='#stores' className={currentNavItem === 'stores' ? 'selected' : ''} onClick={() => handleNavClick('stores')}>Stores</Link>
         </div>
-     
       </div>
 
       <div className='header-right'>
         <div className='user-icons'>
-        {!userauth ? 
-        <Link to="/login"><a>Login</a></Link>
-        : <a style={{cursor:'pointer'}}
-        onClick={handlelogout }>Logout</a> }
-
-          <a href='#read'>Cabinet</a>
-  <Link to="/cart"><a>Cart {cartlength ? <small style={{color :"green"}} >{cartlength}</small> :''} </a></Link>
+        <Link to="/Products" className={`nav-link ${currentNavItem === 'Products' ? 'selected' : ''}`}>Products</Link>
+          {!userauth ? (
+            <Link to="/login" className='nav-link'>Login</Link>
+          ) : (
+            <a style={{ cursor: 'pointer' }} onClick={handlelogout} className='nav-link'>Logout</a>
+          )}
+          <Link to="/cart" className={`nav-link ${currentNavItem === 'cart' ? 'selected' : ''}`}>Cart {cartlength ? <small style={{color: "red", fontSize :'12px' ,}}>{cartlength}</small> : ''}</Link>
         </div>
         <FaBars className='menu-icon' onClick={toggleMenu} />
       </div>
-      {/* className={`header ${isHidden ? 'header--hidden' : ''} ${isSticky ? 'header--sticky' : ''}`} */}
-      <div className={`mobile-menu-content ${isMenuOpen ? 'open' : 'close'}`}>
-        <IoMdClose className='close-icon' onClick={toggleMenu} />
-        <div className='mobile-nav-links'>
-          
-          <Link to='/'
-  
-            className={selectedNavItem === 'home' ? 'selected' : ''}
-            onClick={() => handleNavClick('home')}
-          
->
-            Home
-            </Link>
 
-            <Link to='/cart'
-            className={selectedNavItem === 'cart' ? 'selected' : ''}
-            onClick={() => handleNavClick('cart')}
-          >
-           Cart {cartlength ? <small style={{color :"green"}} >{cartlength}</small> :''}
-          </Link>
-        
-          <a
-            href='#shop'
-            className={selectedNavItem === 'shop' ? 'selected' : ''}
-            onClick={() => handleNavClick('shop')}
-          >
-            Shop
-          </a>
-
-   {!userauth ? 
-          <a
-          style={{cursor:'pointer'}}
-            className={selectedNavItem === 'Login' ? 'selected' : ''}
-            onClick={() => naviagte('/login')}
-          >
-            Login
-          </a>
-          :
-          <a
-           style={{cursor:'pointer'}}
-            onClick={handlelogout }
-          >
-            Logout
-          </a>
-   }
-
-          <a
-            href='#stores'
-            className={selectedNavItem === 'stores' ? 'selected' : ''}
-            onClick={() => handleNavClick('stores')}
-          >
-            Stores
-          </a>
-          <a
-            href='#user'
-            className={selectedNavItem === 'user' ? 'selected' : ''}
-            onClick={() => handleNavClick('user')}
-          >
-            User
-          </a>
-          <a
-         
-            className={selectedNavItem === 'cabinet' ? 'selected' : ''}
-            onClick={() => handleNavClick('cabinet')}
-          >
-           cabinet
-          </a>
+      {/* Mobile Section */}
+     <div className={`mobile-menu-content  ${isMenuOpen ? 'open' : 'close'} `}>
       
-         
-        </div>
+        <IoMdClose className='close-icon'  onClick={toggleMenu}  />
+      <div className='mobile-nav-links'>
+        <Link to='/' onClick={toggleMenu} className={currentNavItem === 'home' ? 'selected' : ''} >Home</Link>
+        <Link to='/cart' onClick={toggleMenu}  className={currentNavItem === 'cart' ? 'selected' : ''} >Cart {cartlength ? <small style={{ color: "green" }}>{cartlength}</small> : ''}</Link>
+        <Link to='#shop' className={currentNavItem === 'shop' ? 'selected' : ''} onClick={() => handleNavClick('shop')}>Shop</Link>
+        {!userauth ? (
+          <a style={{ cursor: 'pointer' }} className={currentNavItem === 'Login' ? 'selected' : ''} onClick={() => navigate('/login')}>Login</a>
+        ) : (
+          <a style={{ cursor: 'pointer' }} onClick={handlelogout}>Logout</a>
+        )}
+        <Link to='/Products' onClick={toggleMenu} className={currentNavItem === 'Products' ? 'selected' : ''}>Products</Link>
+     
+        <Link to='#cabinet' className={currentNavItem === 'cabinet' ? 'selected' : ''} onClick={() => handleNavClick('cabinet')}>Cabinet</Link>
       </div>
+    </div>
+    
     </header>
   );
 };
-
-
-export default HeaderContent

@@ -2,12 +2,15 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    font-family: "Poppins", sans-serif;
+ 
     padding: 20px;
   
+    min-height: 100vh;
+    padding-top: 50px;
     .left-section, .right-section {
       flex: 1;
       padding: 20px;
+      
     }
   
     .left-section {

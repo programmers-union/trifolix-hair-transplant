@@ -5,7 +5,7 @@ import { Autoplay, EffectFade } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/effect-fade';
 import './homepage.scss';
-import { Header } from '../../componets/Header/Header';
+
 import { Carosel } from '../../componets/Carosel/Carosel';
 import { AiOutlineRight } from 'react-icons/ai';
 import { Section3 } from '../../componets/Section3/Section3';
@@ -13,6 +13,7 @@ import { Section4 } from '../../componets/Section4/Section4';
 import { Footer } from '../../componets/Footer/Footer';
 import { Section5 } from '../../componets/section5/Section5';
 import { IoIosArrowForward } from 'react-icons/io';
+
 
 export const Homepage = () => {
   const navigate = useNavigate();
@@ -25,17 +26,18 @@ export const Homepage = () => {
   };
 
   const sections = [
-    {
-      title: "Your Heading Here 1",
-      content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ut erat non nisi.",
-      image: 'https://www.aesop.com/u1nb1km7t5q7/6oMdPxraLxVxMj7xpTCcH5/a0c220803246962ecd24b91b1c31d043/Aesop_Personal_Care_2022_Web_Homepage_Secondary_50-50_Tablet_1536x950px.jpg',
-      backgroundColor: '#7b7261'
-    },
+   
     {
       title: "Your Heading Here 2",
       content: "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       image: 'https://www.aesop.com/u1nb1km7t5q7/5U605A7FoYhpc3VYMLKo1F/bc9eb15a32b39c4a122a46e5a79482d8/Aesop_Eleos_Sleeve_KR_2024_Web_Homepage_Secondary_Mid_Tablet_1400x788px.jpg',
       backgroundColor: '#d0afde'
+    },
+    {
+      title: "Your Heading Here 1",
+      content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ut erat non nisi.",
+      image: 'https://www.aesop.com/u1nb1km7t5q7/6oMdPxraLxVxMj7xpTCcH5/a0c220803246962ecd24b91b1c31d043/Aesop_Personal_Care_2022_Web_Homepage_Secondary_50-50_Tablet_1536x950px.jpg',
+      backgroundColor: '#7b7261'
     },
     {
       title: "Your Heading Here 3",
@@ -47,7 +49,9 @@ export const Homepage = () => {
 
   return (
     <div className='homepage'>
+ 
       <div className='content-section'>
+
         <Swiper
           modules={[Autoplay, EffectFade]}
           effect="fade"

@@ -1,9 +1,11 @@
 import React, { useState, useContext, useEffect } from 'react';
 import './signuppage.scss';
 
+
+import axios from 'axios';
 import { ContextApi } from '../../componets/Contextapi/Context';
 import { Modal } from '../../componets/Modal/Modal';
-import axios from 'axios';
+import toast from 'react-hot-toast';
 
 export const SignUpPage = () => {
   const { setShowOtpModal, showOtpModal, timer, setTimer, formData, setFormData } = useContext(ContextApi);
@@ -14,8 +16,8 @@ export const SignUpPage = () => {
     let tempErrors = {};
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    if (formData.firstName.length < 3 || formData.firstName.length > 6) {
-      tempErrors.firstName = 'First name must be between 3 and 6 characters';
+    if (formData.firstName.length < 3 || formData.firstName.length > 20) {
+      tempErrors.firstName = 'First name must be between 3 and 20 characters';
     }
 
     if (!emailRegex.test(formData.email)) {
@@ -34,8 +36,6 @@ export const SignUpPage = () => {
     return Object.keys(tempErrors).length === 0;
   };
 
-  
-
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -53,19 +53,17 @@ export const SignUpPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validate()) {
-
       try {
-         console.log("called");
-         
-        const response = await axios.post('http://localhost:5000/api/auth/signup',formData);
+        const response = await axios.post('http://localhost:5000/api/auth/signup', formData);
         console.log('Form Submitted:', response.data);
         setShowOtpModal(true);
-       
-
+   
       } catch (error) {
+        toast.error('This Email is Already in use', {
+          position: 'top-center',
+        });
         console.error('There was an error submitting the form:', error);
       }
-
     }
   };
 
@@ -111,7 +109,6 @@ export const SignUpPage = () => {
           <div className="input-group">
             <label htmlFor="email">Email</label>
             <input
-            
               type="email"
               name="email"
               id="email"
@@ -126,7 +123,6 @@ export const SignUpPage = () => {
             <label htmlFor="password">Password</label>
             <div className="password-input">
               <input
-            
                 type={showPassword ? "text" : "password"}
                 name="password"
                 id="password"
@@ -148,7 +144,6 @@ export const SignUpPage = () => {
           <div className="input-group">
             <label htmlFor="confirmPassword">Confirm Password</label>
             <input
-              
               type="password"
               name="confirmPassword"
               id="confirmPassword"
@@ -165,8 +160,7 @@ export const SignUpPage = () => {
           Already have an account? <a href="/login">Login</a>
         </p>
       </div>
-      {showOtpModal && <Modal />}
-     
+      {showOtpModal && <Modal/>}
     </div>
   );
 };

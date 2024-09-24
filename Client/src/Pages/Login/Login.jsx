@@ -3,6 +3,7 @@ import './login.scss';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { ContextApi } from '../../componets/Contextapi/Context';
+import { toast, Toaster } from 'react-hot-toast';
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -10,24 +11,20 @@ export const Login = () => {
     email: '',
     password: '',
   });
-  const {setUserAuth,userauth,setSignup} = useContext(ContextApi)
+  const { setUserAuth, setSignup } = useContext(ContextApi);
   const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) => {
-
     setLoginData({
       ...loginData,
       [e.target.name]: e.target.value,
-
     });
 
     if (errors[e.target.name]) {
-
       setErrors({
         ...errors,
         [e.target.name]: '',
-
       });
     }
   };
@@ -41,39 +38,39 @@ export const Login = () => {
     }
 
     setErrors(tempErrors);
-
     return Object.keys(tempErrors).length === 0;
-
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validate()) {
       try {
-        const response = await axios.post('http://localhost:5000/api/auth/login', loginData,{withCredentials:true});
+        const response = await axios.post('http://localhost:5000/api/auth/login', loginData, { withCredentials: true });
         console.log('Form Submitted:', response.data);
-        // handle successful login (e.g., navigate to dashboard, store token, etc.)
-        navigate('/')
-        const accessToken = response.data.accessToken
+        const accessToken = response.data.accessToken;
         localStorage.setItem("accessToken", accessToken);
-        setUserAuth(true)
-        
+        setUserAuth(true);
+        toast.success('Login Successful..!', {
+          position: 'top-center',
+        });
+        navigate('/');
       } catch (error) {
         console.error('Error submitting form:', error);
-        // handle error response
+        toast.error('Incorrect Email or Password.', {
+          position: 'top-center',
+        });
       }
-
-      console.log('Form Submitted', loginData);
     }
   };
 
   const handleNavigateToForgotPassword = () => {
-    setSignup(false)
+    setSignup(false);
     navigate('/forgot');
   };
 
   return (
     <div className='outer-main'>
+       {/* This will render the toast notifications */}
       <div className='form-main-div'>
         <h2>Login</h2>
         <div className='inside-form-div'>
@@ -81,7 +78,6 @@ export const Login = () => {
             <input
               type="email"
               name="email"
-              placeholder=""
               value={loginData.email}
               onChange={handleChange}
             />
@@ -93,7 +89,6 @@ export const Login = () => {
             <input
               type={showPassword ? "text" : "password"}
               name="password"
-              placeholder=" "
               value={loginData.password}
               onChange={handleChange}
             />
@@ -124,5 +119,3 @@ export const Login = () => {
     </div>
   );
 };
-
-
