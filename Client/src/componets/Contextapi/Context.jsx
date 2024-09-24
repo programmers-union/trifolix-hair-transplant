@@ -93,6 +93,8 @@ export const Apiprovider = ({ children }) => {
 
       setProducts(response.data.products);
       console.log(response.data.products)
+
+      
       fetchCart()
     } catch (error) {
       console.error('Error fetching the products:', error);
