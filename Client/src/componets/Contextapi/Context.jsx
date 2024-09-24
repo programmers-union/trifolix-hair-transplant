@@ -4,7 +4,9 @@ import { axiosInterceptorPage } from "../Interceptor/interceptor"; // Assuming t
 import axios from "axios";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
+import dotenv from 'dotenv'
 
+dotenv.config();
 
 export const ContextApi = createContext();
 
@@ -46,7 +48,7 @@ export const Apiprovider = ({ children }) => {
       console.log("inside cart 1");
       const access = localStorage.getItem('accessToken')
       if (access) {
-        const response = await axiosInstance.get('http://localhost:5000/api/user/cart');
+        const response = await axiosInstance.get(`${process.env.API_DEFAULT}/api/user/cart`);
         setAllCartData(response.data.cartData.items)
         console.log(response.data.cartData.cartTotal, "total");
         setTotalPrice(response.data.cartData.cartTotal)
@@ -87,7 +89,7 @@ export const Apiprovider = ({ children }) => {
   const fetchProducts = async () => {
     try {
 
-      const response = await axios.get('https://trifolix-hair-transplant-3.onrender.com/api/user/product-data');
+      const response = await axios.get(`${process.env.API_DEFAULT}/api/user/product-data`);
 
       setProducts(response.data.products);
       console.log(response.data.products)
@@ -112,7 +114,7 @@ export const Apiprovider = ({ children }) => {
     setOtpAllow(false);
 
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/resend-otp', { email: formData.email || forgetemail });
+      const response = await axios.post('https://trifolix-hair-transplant-3.onrender.com/api/auth/resend-otp', { email: formData.email || forgetemail });
       console.log('OTP Resent:', response.data);
 
 
