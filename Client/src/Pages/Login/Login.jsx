@@ -29,6 +29,8 @@ export const Login = () => {
     }
   };
 
+     const REACT_APP_API_DEFAULT = "https://trifolix-hair-transplant-3.onrender.com"
+
   const validate = () => {
     let tempErrors = {};
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -45,7 +47,7 @@ export const Login = () => {
     e.preventDefault();
     if (validate()) {
       try {
-        const response = await axios.post('http://localhost:5000/api/auth/login', loginData, { withCredentials: true });
+        const response = await axios.post(`${REACT_APP_API_DEFAULT}/api/auth/login`, loginData, { withCredentials: true });
         console.log('Form Submitted:', response.data);
         const accessToken = response.data.accessToken;
         localStorage.setItem("accessToken", accessToken);

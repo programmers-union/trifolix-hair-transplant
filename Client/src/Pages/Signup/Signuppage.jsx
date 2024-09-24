@@ -12,6 +12,10 @@ export const SignUpPage = () => {
   const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
 
+
+  const REACT_APP_API_DEFAULT = "https://trifolix-hair-transplant-3.onrender.com"
+
+
   const validate = () => {
     let tempErrors = {};
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -54,7 +58,7 @@ export const SignUpPage = () => {
     e.preventDefault();
     if (validate()) {
       try {
-        const response = await axios.post('http://localhost:5000/api/auth/signup', formData);
+        const response = await axios.post(`${REACT_APP_API_DEFAULT}/api/auth/signup`, formData);
         console.log('Form Submitted:', response.data);
         setShowOtpModal(true);
    

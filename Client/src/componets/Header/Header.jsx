@@ -151,6 +151,9 @@ export const Header = ({ visible }) => {
     setHeaderHeight(headerRef.current?.offsetHeight || 0);
   }, []);
 
+
+  const REACT_APP_API_DEFAULT = "https://trifolix-hair-transplant-3.onrender.com"
+
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
@@ -212,7 +215,7 @@ export const Header = ({ visible }) => {
 
     const axiosInstance = axiosInterceptorPage();
     try {
-      const response = await axiosInstance.post('http://localhost:5000/api/user/checking', { selectedNavItem: item },
+      const response = await axiosInstance.post(`${REACT_APP_API_DEFAULT}/api/user/checking`, { selectedNavItem: item },
         { headers: { "Content-Type": "application/json" } });
       console.log(response.data, "data");
     } catch (error) {
@@ -223,7 +226,7 @@ export const Header = ({ visible }) => {
   const handlelogout = async () => {
     const axiosInstance = axiosInterceptorPage();
     try {
-      const response = await axiosInstance.post('http://localhost:5000/api/auth/logout', {},
+      const response = await axiosInstance.post(`${REACT_APP_API_DEFAULT}/api/auth/logout`, {},
         { headers: { "Content-Type": "application/json" } });
       console.log(response.data, "logout successfully");
       setUserAuth(false);

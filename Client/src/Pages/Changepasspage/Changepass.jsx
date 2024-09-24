@@ -21,12 +21,12 @@ export const Changepass = () => {
     setError('');
     console.log(forgetemail,"inside changepass");
     
-     
+       const REACT_APP_API_DEFAULT = "https://trifolix-hair-transplant-3.onrender.com"
     
     try {
         console.log(forgetemail,password,"inside changepass");
        
-        const response = await axios.post('http://localhost:5000/api/auth/change-password',{forgetemail, password},{withCredentials:true});
+        const response = await axios.post(`${REACT_APP_API_DEFAULT}/api/auth/change-password`,{forgetemail, password},{withCredentials:true});
            console.log(response.data,"data is here");
            
            console.log('Password changed successfully');

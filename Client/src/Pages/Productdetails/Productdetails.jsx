@@ -10,6 +10,9 @@ export const ProductPage = () => {
   const [productDetails, setProductDetails] = useState(null);
   const { id } = useParams();
 
+  const REACT_APP_API_DEFAULT = "https://trifolix-hair-transplant-3.onrender.com"
+
+
   useEffect(() => {
     const fetchData = async () => {
       if (!products.length) {

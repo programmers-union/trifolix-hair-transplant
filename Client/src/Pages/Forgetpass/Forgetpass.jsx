@@ -18,6 +18,11 @@ export const Forgetpass = () => {
       
       };
 
+        const REACT_APP_API_DEFAULT = "https://trifolix-hair-transplant-3.onrender.com"
+    
+    
+
+
       useEffect(() => {
         if (showOtpModal && timer > 0) {
           const intervalId = setInterval(() => {
@@ -40,7 +45,7 @@ export const Forgetpass = () => {
       try {
 
         console.log("before validate");
-        const response = await axios.post('http://localhost:5000/api/auth/forgot-password',{forgetemail})
+        const response = await axios.post(`${REACT_APP_API_DEFAULT}/api/auth/forgot-password`,{forgetemail})
         console.log(response.data,"This data is updated");
         setforgetsetEmail(forgetemail)
         setShowOtpModal(true)
