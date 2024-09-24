@@ -41,7 +41,7 @@ export const Apiprovider = ({ children }) => {
 
 
 
-
+ console.log(forgetemail,'hi')
   const fetchCart = async () => {
 
     try {
@@ -93,6 +93,11 @@ export const Apiprovider = ({ children }) => {
 
       setProducts(response.data.products);
       console.log(response.data.products)
+      console.log("hello");
+      console.log("heyy");
+      
+
+
       fetchCart()
     } catch (error) {
       console.error('Error fetching the products:', error);
