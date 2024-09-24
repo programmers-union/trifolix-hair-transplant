@@ -86,7 +86,9 @@ export const Apiprovider = ({ children }) => {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get('https://trifolix-hair-transplant-2.onrender.com/api/user/product-data');
+
+      const response = await axios.get('https://trifolix-hair-transplant-3.onrender.com/api/user/product-data');
+
       setProducts(response.data.products);
       console.log(response.data.products)
       fetchCart()
