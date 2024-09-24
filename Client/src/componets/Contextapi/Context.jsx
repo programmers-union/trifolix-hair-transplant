@@ -41,7 +41,7 @@ export const Apiprovider = ({ children }) => {
 
 
 
-
+ console.log(forgetemail,'hi')
   const fetchCart = async () => {
 
     try {
