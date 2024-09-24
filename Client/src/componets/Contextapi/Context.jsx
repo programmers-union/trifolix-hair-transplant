@@ -86,7 +86,7 @@ export const Apiprovider = ({ children }) => {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/user/product-data');
+      const response = await axios.get('https://trifolix-hair-transplant-x2a8-frontend.vercel.app/api/user/product-data');
       setProducts(response.data.products);
       console.log(response.data.products)
       fetchCart()
